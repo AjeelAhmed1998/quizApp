@@ -1,47 +1,42 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
-import { render } from "react-dom";
+import React, { useState } from 'react';
+import {Text,TouchableHighlight,} from 'react-native';
+import styles from './styles'
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     
-    };
-  }
+import Quiz from './Quiz';
 
-  render() {
-    return (
-      <View style={style.container}>
-        <TouchableOpacity style={style.startContainer}>
+export default function App() {
+  const [current,setCurrent] = useState('Home')
 
+  const Home = (
+    <>
+    <Text style={styles.sectionTitle}>Welcome to My Quiz App</Text>
+    <TouchableHighlight 
+    style={styles.submit}
+    onPress={()=>setCurrent(QuizScreen)}
+    >
+    <Text style={[styles.submitText]}>
+      START QUIZ
+      </Text>
+    </TouchableHighlight>
+    
+    
+  </>
+  )
+  
+  const QuizScreen =(
+    <>
+    <Quiz></Quiz>
+    </>
+  )
+  
 
-          <Text>
-            Start
-          </Text>
-
-        </TouchableOpacity>
-        
-        
-        
-      </View>
-    );
-  }
-}
-
-
-const style = StyleSheet.create({
-  container: {
-
-    flex: 1, 
-    alignItems:"center",
-    backgroundColor: "red"
-
-  },
-  startContainer:{
-    flex: 1, 
-    alignItems: "center"
-  }, 
-  Header:{}
-});
+  return current === "Home" ? Home : current;
+};
